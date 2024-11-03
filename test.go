@@ -1,34 +1,54 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
+
+func sayGoodMorning(name string) {
+	fmt.Printf("Good Morning %v\n", name)
+}
+
+func sayGoodNight(name string) {
+	fmt.Printf("Good Night %v\n", name)
+}
+
+func sayGoodMorningAll(names []string) {
+	for _, v := range names {
+		fmt.Printf("Good Morning %v\n", v)
+	}
+}
+
+func namesAndGreetings(names []string, greetings func(string)) {
+	for _, v := range names {
+		greetings(v)
+	}
+}
 
 func main() {
 
-	var myString string = "This is a variable string"
-	var myNumber int = 3
-	var myFloatNumber float64 = 2.33
-	const myConst string = "This is a const string"
+	var names []string = []string{"mario", "luigi", "yoshi", "peach"}
 
-	var myArray [3]int = [3]int{20, 25, 30}
-	var anotherArray [2]int = [2]int{4, 5}
+	for i := 0; i < len(names); i++ {
+		fmt.Println(names[i])
+	}
 
-	var mySlice []int = []int{1, 2, 3}
-	var mySlice2 = []int{1, 2, 3, 4, 5}
-	mySlice3 := []int{1, 2, 3, 4, 5, 6}
+	for i, v := range names {
+		fmt.Println(i, v)
+	}
 
-	fmt.Println(myString)
-	fmt.Println(myNumber)
-	fmt.Println(myFloatNumber)
-	fmt.Println(myConst)
+	for _, v := range names {
+		fmt.Println(v)
+	}
 
-	myString = "This is a variable string 2"
-	myNumber = 6
+	// Invoking sayGoodMorning()
+	sayGoodMorning("Ava")
 
-	fmt.Println(myString)
-	fmt.Println(myNumber)
+	// Invoking sayGoodNight()
+	sayGoodNight("Alex")
 
-	fmt.Printf("%v and %v. And %v is an integer while %v is a float\n", myString, myConst, myNumber, myFloatNumber)
+	// Invoking sayGoodMorningAll()
+	sayGoodMorningAll(names)
 
-	fmt.Println(myArray, len(myArray), anotherArray, len(anotherArray))
-
+	// Invoking namesAndGreetings()
+	namesAndGreetings(names, sayGoodNight)
 }
