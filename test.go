@@ -26,8 +26,13 @@ func namesAndGreetings(names []string, greetings func(string)) {
 
 func main() {
 
+	//Slice
 	var names []string = []string{"mario", "luigi", "yoshi", "peach"}
 
+	//Map
+	var menu map[string]float64 = map[string]float64{"soup": 4.99, "pie": 7.99, "salad": 6.99, "toffee pudding": 3.55}
+
+	//Looping through a Slice
 	for i := 0; i < len(names); i++ {
 		fmt.Println(names[i])
 	}
@@ -38,6 +43,11 @@ func main() {
 
 	for _, v := range names {
 		fmt.Println(v)
+	}
+
+	//Looping through a Map
+	for k, v := range menu {
+		fmt.Println(k, "-", v)
 	}
 
 	// Invoking sayGoodMorning()
@@ -51,4 +61,10 @@ func main() {
 
 	// Invoking namesAndGreetings()
 	namesAndGreetings(names, sayGoodNight)
+
+	// Printing Slice
+	fmt.Println(names)
+
+	// Printing Map
+	fmt.Println(menu)
 }
