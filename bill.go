@@ -13,14 +13,14 @@ type bill struct {
 func newBill(name string) bill {
 	b := bill{
 		name:  name,
-		items: map[string]float64{"pie": 5.99, "cake": 3.99},
+		items: map[string]float64{},
 		tip:   0,
 	}
 	return b
 }
 
 // Receiver function - receives a unformatted bill and returns a formatted bill
-func (b bill) format() string {
+func (b *bill) format() string {
 	fs := "Bill breakdown: \n"
 	var total float64 = 0
 
@@ -30,9 +30,22 @@ func (b bill) format() string {
 		total += v
 	}
 
+	//Add tip
+	fs += fmt.Sprintf("%-25v ...$%0.2f \n", "tip:", b.tip)
+
 	//Add total to formatted string fs. -25 represents spacing to the right
-	fs += fmt.Sprintf("%-25v ...$%0.2f", "total:", total)
+	fs += fmt.Sprintf("%-25v ...$%0.2f \n", "total:", total+b.tip)
 
 	//Return the formatted fs string
 	return fs
+}
+
+// Function to update tip
+func (b *bill) updateTip(tip float64) {
+	b.tip = tip
+}
+
+// Function to add item to the bill
+func (b *bill) addItem(name string, price float64) {
+	b.items[name] = price
 }
