@@ -24,7 +24,7 @@ func namesAndGreetings(names []string, greetings func(string)) {
 	}
 }
 
-func main() {
+func mainOld() {
 
 	//Slice
 	var names []string = []string{"mario", "luigi", "yoshi", "peach"}
@@ -67,4 +67,12 @@ func main() {
 
 	// Printing Map
 	fmt.Println(menu)
+
+	// Understanding pointers
+	var s string = "Hello"
+
+	fmt.Println(s)  //shows value of s
+	fmt.Println(&s) // shows memory location of s
+	ns := &s
+	fmt.Println(*ns) // shows value of s
 }
