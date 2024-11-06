@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	"strconv"
 	"strings"
 )
 
@@ -37,12 +38,30 @@ func promptOptions(b bill) { //giving user prompt options to add an item, tip or
 	case "a":
 		name, _ := getInput("Item name: ", reader)
 		price, _ := getInput("Item price: ", reader)
-		fmt.Println(name, price)
+
+		p, err := strconv.ParseFloat(price, 64) //Method ParseFloat from strconv package returns two values: float value and error if any
+		if err != nil {
+			fmt.Println("The price must be a number") // print the message and
+			promptOptions(b)                          //invoke promptOptions
+		}
+		b.addItem(name, p) //else add the name and the price to bill object
+
+		fmt.Println("Item added - ", name, price)
+		promptOptions(b) // invoke promptOptons for another item
 	case "t":
 		tip, _ := getInput("Enter tip amount ($): ", reader)
-		fmt.Println(tip)
+
+		t, err := strconv.ParseFloat(tip, 64) //Method ParseFloat from strconv package returns two values: float value and error if any
+		if err != nil {
+			fmt.Println("The tip must be a number") // print the message and
+			promptOptions(b)                        //invoke promptOptions
+		}
+		b.updateTip(t) //else add the name and the price to bill object
+
+		fmt.Println("tip added - ", tip)
+		promptOptions(b) // invoke promptOptons for another item
 	case "s":
-		fmt.Println("You chose s")
+		fmt.Println("You chose to save the bill", b)
 	default:
 		fmt.Println("that was not a valid option")
 		promptOptions(b)
