@@ -1,0 +1,6 @@
+Bill breakdown: 
+Cake:                     ...$3.99 
+Pizza:                    ...$5.99 
+Coffee:                   ...$3.99 
+tip:                      ...$2.99 
+total:                    ...$16.96 

@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 // Custom Struct Type acts as a blue print for any bill object
 type bill struct {
@@ -40,12 +43,23 @@ func (b *bill) format() string {
 	return fs
 }
 
-// Function to update tip
+// Receiver function - function to update tip
 func (b *bill) updateTip(tip float64) {
 	b.tip = tip
 }
 
-// Function to add item to the bill
+// Receiver function - function to add item to the bill
 func (b *bill) addItem(name string, price float64) {
 	b.items[name] = price
+}
+
+// Receiver funcion - function to save bill
+func (b *bill) save() {
+	data := []byte(b.format()) //turn fomatted string of the bill into byte slice and store in data variable
+
+	err := os.WriteFile("bills/"+b.name+".txt", data, 0644) //write files to bills folder with billname.txt and 0644 permissions. Returns error if any.
+	if err != nil {
+		panic(err) // stop the flow of the program and print out an error
+	}
+	fmt.Println("bill was saved to file")
 }
